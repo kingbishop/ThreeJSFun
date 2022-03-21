@@ -35,9 +35,8 @@ class Game {
     private start() {
         document.body.appendChild(this.renderer.domElement)
 
-        let torusGeometry = new TorusGeometry(10,20,20,20)
-        let material = new MeshBasicMaterial({color:'rgb(255,0,0)', wireframe: true})
-        let torus = new Mesh(torusGeometry, material)
+       
+       
         let world = this.sceneManager.getCurrentWorld()
         let camera = world.getCamera()
 
@@ -76,12 +75,8 @@ class Game {
         let world = this.sceneManager.getCurrentWorld()
         let camera = world.getCamera()
 
-        let floor = world.getObject("Floor") as Mesh
-        // let torus = world.getObject("Torus") as Mesh
-        // if(torus)
-        // torus.rotation.z += 0.001
-
-        world.update()
+        //Call Update on All StateObjects within the World
+        world.update() 
 
         this.prevTime = time
         this.renderer.render(scene, camera)

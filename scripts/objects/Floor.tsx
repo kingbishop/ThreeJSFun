@@ -15,12 +15,12 @@ class Floor {
         this.mesh = new Mesh(this.geometry,this.material)
     }
 
-    setMaterial(material:Material){
+    public setMaterial(material:Material){
         this.material = material
         this.mesh.material = material
     }
 
-    getObject() {
+    public getObject() {
         return this.mesh
     }
 

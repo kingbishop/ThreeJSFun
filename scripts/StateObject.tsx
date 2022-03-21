@@ -5,7 +5,7 @@ abstract class StateObject {
 
     }
 
-    abstract update()
+    public abstract update()
 }
 
 

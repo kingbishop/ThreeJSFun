@@ -58,7 +58,7 @@ class World extends StateObject {
     }
 
 
-    public update() {
+    public override update() {
         this.objects.forEach((v,k) => {
             if(v instanceof StateObject){
                 let so = v as StateObject

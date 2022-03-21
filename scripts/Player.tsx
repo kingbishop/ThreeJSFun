@@ -60,7 +60,7 @@ class Player extends StateObject {
     }
 
 
-    override update() {
+    public override update() {
         //this.rotateCamera()
         this.direction.z = Number(Controls.forward) - Number(Controls.backwards)
         this.direction.x = Number(Controls.right) - Number(Controls.left)
