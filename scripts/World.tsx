@@ -1,4 +1,5 @@
 import { Camera, Object3D, PerspectiveCamera, Scene } from "three"
+import { Body, Vec3, World as CWorld } from "cannon-es"
 import Screen from "./Screen"
 import StateObject from "./StateObject"
 
@@ -10,12 +11,18 @@ class World extends StateObject {
     private objects : Map<String,any>
     private scene: Scene
     private camera: Camera
+    private cWorld: CWorld
+    
 
     constructor(scene: Scene) {
         super()
         this.objects = new Map()
         this.scene = scene
         this.setPerspectiveCamera()
+
+        this.cWorld = new CWorld({
+            gravity: new Vec3(0, -20, 0)
+        })
     }
 
     public setPerspectiveCamera(){
@@ -35,6 +42,11 @@ class World extends StateObject {
         if(object instanceof Object3D){
             this.scene.add(object)
         }
+
+        if(object instanceof Body){
+            this.cWorld.addBody(object)
+        }
+        
        
     }
     
@@ -48,10 +60,16 @@ class World extends StateObject {
             if(object instanceof Object3D){
                 this.scene.remove(object)
             }
+
+            if(object instanceof Body){
+                this.cWorld.removeBody(object)
+            }
            
         }
         this.objects.delete(objectName)
     }
+
+    c
 
     public getObject(objectName: String) {
         return this.objects.get(objectName)
@@ -65,6 +83,8 @@ class World extends StateObject {
                 so.update()
             }
         })
+
+        this.cWorld.fixedStep()
     }
 
 
